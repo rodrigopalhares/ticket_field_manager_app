@@ -111,7 +111,8 @@
       return _.any([
         this.currentUserIsWhitelistedByTagFor(type),
         this.currentUserIsWhitelistedByGroupFor(type),
-        this.currentUserIsWhitelistedByOrganizationFor(type)
+        this.currentUserIsWhitelistedByOrganizationFor(type),
+        this.currentUserIsAdmin(type)
       ]);
     },
 
@@ -137,6 +138,11 @@
           });
 
       return this.deepContains(current_organization_ids, organization_ids);
+    },
+
+
+    currentUserIsAdmin: function(type) {
+      return this.data.user.role == 'admin';
     },
 
     //list and values should be Arrays
